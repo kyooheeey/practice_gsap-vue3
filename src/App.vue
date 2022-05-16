@@ -24,7 +24,7 @@ export default {
 <style>
 body {
   background-color: #F5F5F5;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: 'Poppins', sans-serif;
   margin: 0px;
 }
 

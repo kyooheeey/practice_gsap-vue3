@@ -9,7 +9,7 @@
         >
         <div class="header-container">
             <div class="header-title">
-                <span class="header-title-text">Vue x GSAP PRACTICE</span>
+                <span class="header-title-text">Vue3 & GSAP PRACTICE</span>
             </div>
             <transition
                 appear
@@ -18,9 +18,9 @@
             >
                 <div class="links-container">
                     <div class="links">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                        <a href="/">Replay</a>
+                        <a href="https://github.com/kyooheeey/practice_gsap-vue3" target="_blank">GitHub</a>
+                        <a href="https://twitter.com/TOKYO_KNOWHOW" target="_blank">Twitter</a>
                     </div>
                 </div>
             </transition>
@@ -77,14 +77,14 @@ export default {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    background-color: #2dd4bf;
+    background-color: #14B8A6;
     padding: 1.5rem;
 }
 
 .header-title {
     flex-shrink: 0;
     color: #ffffff;
-    margin-right: 1.5rem;
+    margin-right: 3rem;
 }
 
 .header-title-text {

@@ -25,7 +25,9 @@
                 @before-enter="ballBeforeEnter"
                 @enter="ballEnter"
             >
-                <img class="circle" src="../assets/circle.svg" alt="Circle"/>
+                <svg  class="circle" width="203" height="203" viewBox="0 0 203 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="101.5" cy="101.5" r="101.5" fill="#14B8A6"/>
+                </svg>
             </transition>
         </div>
         <!--ここでtransitionをクローズ-->
@@ -40,9 +42,9 @@ export default {
     setup() {
         // 表示するテキストを設定
         const lines = ref([
-            { phrase: "Vue" },
-            { phrase: "Meets" },
+            { phrase: "Vue3 &" },
             { phrase: "GSAP" },
+            { phrase: "PRACTICE" },
         ])
         // ここにアニメーションを追加
         const textBeforeEnter = (el) => {
@@ -73,11 +75,17 @@ export default {
             const tl = gsap.timeline({delay: 5, onComplete: done})
             const screenWidth = window.innerWidth
             const elementWidth = document.querySelector(".circle").getBoundingClientRect().right
-            tl.to(el, { y: 350 })
+            const circle = el.firstElementChild
+            let bouceHeight = (window.matchMedia("(max-width: 640px)").matches) ? 150 : 350
+            console.log(bouceHeight)
+            tl.to(el, { y: bouceHeight })
             tl.to(el, { y: 0, duration: 0.5 })
-            tl.to(el, { y: 350, duration: 1.25, ease: "bounce.out" })
+            tl.to(el, { y: bouceHeight, duration: 1.25, ease: "bounce.out" })
             tl.to(el, { x: screenWidth - elementWidth - 10, duration: 2.5 }, "-=1.75")
             tl.to(el, { x: 0, duration: 1 }, "+=1")
+            tl.to(circle, { fill: "#F734EC" }, "-=5.25")
+            tl.to(circle, { fill: "#F7C602", duration: 5.25 }, "-=5")
+            tl.to(circle, { fill: "#14B8A6", duration: 2 }, "-=1.25")
         }
         
         return { lines, textBeforeEnter, textEnter, ballBeforeEnter, ballEnter }
@@ -95,27 +103,34 @@ export default {
 
 .text {
     font-size: 5rem;
-    line-height: normal;
+    line-height: 1;
+    font-weight: 600;
 }
 
 .circle {
     position: absolute;
     width: 9rem;
     height: 9rem;
-    top: -1.2rem; /** アニメーション適用後に-1.2remに編集 */
+    top: -3.5rem; /** アニメーション適用後に-1.2remに編集 */
+}
+
+@media (max-width: 1024px) {
+    .text {
+        font-size: 3.5rem;
+    }
+
+    .circle {
+        width: 4.5rem;
+        height: 4.5rem;
+        top: 1rem;
+    }
 }
 
 @media (max-width: 640px) {
     .circle {
-        display: none;
+      top: 1.5rem;
+      left: 1.5rem;
     }
 }
 
-@media (max-width: 1024px) {
-    .circle {
-        width: 7.5rem;
-        height: 7.5rem;
-        top: 3.5rem;
-    }
-}
 </style>

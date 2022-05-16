@@ -40,7 +40,8 @@ export default {
         const panelsBeforeEnter = (el) => {
             gsap.set(el, {
                 y: 100,
-                opacity: 0
+                opacity: 0,
+                scale: 0.9
             })
         }
 
@@ -48,6 +49,7 @@ export default {
             gsap.to(el, {
                 opacity: 1,
                 y: 0,
+                scale: 1,
                 duration: 0.8,
                 delay: 1 + el.dataset.index * 0.2,
                 onComplete: done
@@ -61,6 +63,7 @@ export default {
 
 <style scoped>
 .panels {
+    margin-top: 2rem;
     padding-top: 1rem;
     display: flex;
     align-items: center;
