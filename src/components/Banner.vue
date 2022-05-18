@@ -25,8 +25,14 @@
                 @before-enter="ballBeforeEnter"
                 @enter="ballEnter"
             >
-                <svg  class="circle" width="203" height="203" viewBox="0 0 203 203" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="101.5" cy="101.5" r="101.5" fill="#14B8A6"/>
+                <svg class="circle" width="203" height="203" viewBox="0 0 203 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <transition
+                        appear
+                        @before-enter="circleBeforeEnter"
+                        @enter="circleEnter"
+                    >
+                        <circle cx="101.5" cy="101.5" r="101.5" fill="#14B8A6"/>
+                    </transition>
                 </svg>
             </transition>
         </div>
@@ -75,20 +81,28 @@ export default {
             const tl = gsap.timeline({delay: 5, onComplete: done})
             const screenWidth = window.innerWidth
             const elementWidth = document.querySelector(".circle").getBoundingClientRect().right
-            const circle = el.firstElementChild
             let bouceHeight = (window.matchMedia("(max-width: 640px)").matches) ? 150 : 350
-            console.log(bouceHeight)
             tl.to(el, { y: bouceHeight })
             tl.to(el, { y: 0, duration: 0.5 })
             tl.to(el, { y: bouceHeight, duration: 1.25, ease: "bounce.out" })
             tl.to(el, { x: screenWidth - elementWidth - 10, duration: 2.5 }, "-=1.75")
             tl.to(el, { x: 0, duration: 1 }, "+=1")
-            tl.to(circle, { fill: "#F734EC" }, "-=5.25")
-            tl.to(circle, { fill: "#F7C602", duration: 5.25 }, "-=5")
-            tl.to(circle, { fill: "#14B8A6", duration: 2 }, "-=1.25")
+        }
+
+        const circleBeforeEnter = (el) => {
+            gsap.set(el, {
+                fill: "#F734EC"
+            })
+        }
+
+        const circleEnter = (el, done) => {
+            const tl = gsap.timeline({delay: 4, onComplete: done})
+            tl.to(el, { fill: "#F734EC" })
+            tl.to(el, { fill: "#F7C602", duration: 5.25 })
+            tl.to(el, { fill: "#14B8A6", duration: 2 })
         }
         
-        return { lines, textBeforeEnter, textEnter, ballBeforeEnter, ballEnter }
+        return { lines, textBeforeEnter, textEnter, circleEnter, ballBeforeEnter, ballEnter, circleBeforeEnter }
     }
 }
 </script>
